@@ -3,6 +3,9 @@ uuid = "b47663c2-775e-4d88-bb56-6bef842cff7a"
 authors = ["nanleij <38724800+nanleij@users.noreply.github.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
+
 [compat]
 julia = "1"
 

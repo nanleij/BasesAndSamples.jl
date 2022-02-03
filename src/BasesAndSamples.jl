@@ -2,13 +2,17 @@ module BasesAndSamples
 
 using Combinatorics
 
-export monomial_basis, laguerre_basis, jacobi_basis, chebyshev_basis, gegenbauer_basis
-export sample_points_simplex, padua_points, rescaled_laguerre, sample_points_chebyshev, sample_points_chebyshev_mod
+export basis_monomial, basis_laguerre, basis_jacobi, basis_chebyshev, basis_gegenbauer
+export sample_points_simplex, sample_points_padua, sample_points_rescaled_laguerre, sample_points_chebyshev, sample_points_chebyshev_mod
 
 """Generate the monomial basis in variables x... up to degree d (inclusive)"""
 function basis_monomial(d::Int, x...)
     n = length(x)
-    q = Vector{typeof(prod(one.(x)))}(undef, binomial(n+d,d))
+    if n > 1
+        q = Vector{typeof(prod(one.(x)))}(undef, binomial(n+d,d))
+    elseif n == 1
+        q = Vector{typeof(one(x...))}(undef, binomial(n+d,d))
+    end
     idx = 1
     for k=0:d
         for exponent in multiexponents(n,k)
@@ -118,7 +122,7 @@ end
 
 """Generate 'rescaled laguerre' points, as in SDPB"""
 function sample_points_rescaled_laguerre(d)
-    #as done in simmons duffin: ('rescaled Laguerre')
+    #as done in sdpb: ('rescaled Laguerre')
     # x[k] = sqrt(pi)/(64*(d+1)*log( 3- 2*sqrt(2))) * (-1+4*k)^2, with k=0:d
     constant = -sqrt(BigFloat(pi)) / (64 * (d + 1) * log(3 - 2 * sqrt(BigFloat(2))))
     x = zeros(BigFloat, d + 1)

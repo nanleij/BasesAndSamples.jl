@@ -23,14 +23,14 @@ function basis_monomial(d::Int, x...)
     return q
 end
 
-"""Generate the Laguerre polynomials with parameter alpha up to degree k (inclusive)"""
-function basis_laguerre(k::Integer, alpha, x)
-    v = Vector{typeof(one(alpha) * one(x))}(undef, 1 + k)
+"""Generate the Laguerre polynomials with parameter alpha up to degree d (inclusive)"""
+function basis_laguerre(d::Integer, alpha, x)
+    v = Vector{typeof(one(alpha) * one(x))}(undef, 1 + d)
     v[1] = one(x)
-    k == 0 && return v
+    d == 0 && return v
     v[2] = 1 + alpha - x
-    k == 1 && return v
-    for l = 2:k
+    d == 1 && return v
+    for l = 2:d
         v[l+1] = 1 // big(l) * ((2l - 1 + alpha - x) * v[l] - (l + alpha - 1) * v[l-1])
     end
     return v
@@ -57,32 +57,32 @@ function basis_jacobi(d::Integer, alpha, beta, x, normalized = true)
     return q
 end
 
-"""Generate a basis of chebyshev polynomials up to degree k (inclusive)"""
-function basis_chebyshev(k::Int,x)
-    v = Vector{typeof(one(x))}(undef, 1 + k)
+"""Generate a basis of chebyshev polynomials up to degree d (inclusive)"""
+function basis_chebyshev(d::Int,x)
+    v = Vector{typeof(one(x))}(undef, 1 + d)
     v[1] = one(x)
-    k == 0 && return v
+    d == 0 && return v
     v[2] = x
-    k == 1 && return v
-    for l = 2:k
+    d == 1 && return v
+    for l = 2:d
         v[l+1] = 2x*v[l] - v[l-1]
     end
     return v
 end
 
 
-"""Basis for the Gegenbauer polynomials in dimension n up to degree k.
+"""Basis for the Gegenbauer polynomials in dimension n up to degree d.
  This is the Gegenbauer polynomial with parameter lambda = n/2-1,
  or the Jacobi polynomial with alpha = beta = (n-3)/2.
  Normalized to evaluate to 1 at 1.
  Taken from arxiv/2001.00256, ancillary files, SemidefiniteProgramming.jl"""
-function basis_gegenbauer(k, n, x)
-    v = Vector{typeof(one(x))}(undef, 1 + k)
+function basis_gegenbauer(d, n, x)
+    v = Vector{typeof(one(x))}(undef, 1 + d)
     v[1] = one(x)
-    k == 0 && return v
+    d == 0 && return v
     v[2] = x
-    k == 1 && return v
-    for l = 2:k
+    d == 1 && return v
+    for l = 2:d
         v[l+1] = (2l + n - 4) // (l + n - 3) * x * v[l] - (l - 1) // (l + n - 3) * v[l-1]
     end
     return v

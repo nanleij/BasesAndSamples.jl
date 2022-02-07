@@ -1,6 +1,7 @@
 # BasesAndSamples
 
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://nanleij.github.io/BasesAndSamples.jl/stable)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://nanleij.github.io/BasesAndSamples.jl/dev)
 [![Coverage](https://codecov.io/gh/nanleij/BasesAndSamples.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/nanleij/BasesAndSamples.jl)
 
 Functions for generating various polynomial bases, and for generating sample points.

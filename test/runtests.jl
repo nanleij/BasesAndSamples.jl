@@ -6,8 +6,8 @@ using AbstractAlgebra # for polynomial bases
 @testset "BasesAndSamples.jl" begin
     # Write your tests here.
     @testset "Bases" begin
-        R, (x,) = PolynomialRing(RealField, ["x"])
-        R2, (u,v) = PolynomialRing(RealField, ["u", "v"])
+        R, (x,) = polynomial_ring(RealField, ["x"])
+        R2, (u,v) = polynomial_ring(RealField, ["u", "v"])
         # This is the intuitive order
         @test basis_monomial(3, x) == [R(1), x, x^2, x^3]
         @test basis_monomial(3, u,v) == [R2(1), u, v, u^2, u*v, v^2, u^3, u^2*v, u*v^2,v^3]
